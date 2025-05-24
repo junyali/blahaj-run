@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtk5ao2rkcn23"]
+
+[ext_resource type="Texture2D" uid="uid://ddr7orthv714" path="res://art/characters/blahaj.png" id="1_508ok"]
+[ext_resource type="Script" uid="uid://cyr3pvtp603il" path="res://scripts/player/player.gd" id="1_xxgcw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xxgcw"]
+radius = 13.0384
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xxgcw"]
+bg_color = Color(1.78084e-06, 0.713626, 0.433566, 1)
+
+[node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
+motion_mode = 1
+platform_floor_layers = 1
+script = ExtResource("1_xxgcw")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_508ok")
+offset = Vector2(0, -22)
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -13)
+shape = SubResource("CircleShape2D_xxgcw")
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -24.0
+offset_top = 4.0
+offset_right = 72.0
+offset_bottom = 31.0
+scale = Vector2(0.5, 0.5)
+theme_override_styles/background = SubResource("StyleBoxFlat_xxgcw")
+value = 100.0
+
+[node name="IframeTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="IframeTimer" to="." method="_on_iframe_timer_timeout"]
