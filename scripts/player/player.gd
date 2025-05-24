@@ -34,6 +34,7 @@ var can_shoot: bool = true
 var is_dashing: bool = false
 var can_dash: bool = true
 var dash_direction: Vector2
+var is_dead: bool = false
 
 func _ready() -> void:
 	add_to_group("player")
@@ -43,12 +44,16 @@ func _ready() -> void:
 	setup_dash()
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		return
 	handle_movement(delta)
 	handle_shooting()
 	handle_dash()
 	move_and_slide()
 	
 func _process(delta: float) -> void:
+	if is_dead:
+		return
 	update_health_bar()
 
 func handle_movement(delta: float) -> void:
@@ -163,12 +168,29 @@ func heal(amount: int) -> void:
 	update_health_bar()
 	
 func die() -> void:
+	if is_dead:
+		return
+	get_tree().paused = true
+
+	remove_from_group("player")
+	var enemies = get_tree().get_nodes_in_group("enemies")
+	for enemy in enemies:
+		enemy.set_physics_process(false)
+		enemy.set_process(false)
+		if enemy.has_method("stop_all_timers"):
+			enemy.stop_all_timers()
+	var spawn_managers = get_tree().get_nodes_in_group("spawn_manager")
+	for manager in spawn_managers:
+		manager.set_process(false)
+		manager.set_physics_process(false)
+	await get_tree().process_frame  # Wait one frame
+	is_dead = true
 	var final_stats = GameManager.calculate_final_score()
-	print("Game Over!")
-	print("Final Score: ", final_stats.total_score)
-	print("Enemies Killed: ", final_stats.enemies_killed)
-	print("Time Survived: ", GameManager.format_time(final_stats.survival_time))
-	pass # death logic goes here X_X
+	var game_over_scene = preload("res://levels/game_over.tscn")
+	var game_over_screen = game_over_scene.instantiate()
+	get_tree().current_scene.add_child(game_over_screen)
+	game_over_screen.show_game_over()
+	queue_free()
 
 func _on_iframe_timer_timeout() -> void:
 	is_invulnerable = false

@@ -40,7 +40,7 @@ func _ready() -> void:
 	update_healthbar()
 
 func _physics_process(delta: float) -> void:
-	if not player:
+	if not player or not is_instance_valid(player):
 		return
 	
 	var distance_to_player = global_position.distance_to(player.global_position)

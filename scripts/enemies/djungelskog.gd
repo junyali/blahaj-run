@@ -30,7 +30,7 @@ func _ready() -> void:
 	update_healthbar()
 
 func _physics_process(delta: float) -> void:
-	if not player:
+	if not player or not is_instance_valid(player):
 		return
 		
 	navigation_agent.target_position = player.global_position

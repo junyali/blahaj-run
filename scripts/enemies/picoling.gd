@@ -27,7 +27,7 @@ func _ready() -> void:
 	attack_timer.one_shot = true
 
 func _physics_process(delta: float) -> void:
-	if not player:
+	if not player or not is_instance_valid(player):
 		return
 		
 	var direction = (player.global_position - global_position).normalized()
