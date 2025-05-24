@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtk5ao2rkcn23"]
+[gd_scene load_steps=6 format=3 uid="uid://dtk5ao2rkcn23"]
 
 [ext_resource type="Texture2D" uid="uid://ddr7orthv714" path="res://art/characters/blahaj.png" id="1_508ok"]
 [ext_resource type="Script" uid="uid://cyr3pvtp603il" path="res://scripts/player/player.gd" id="1_xxgcw"]
@@ -18,6 +18,9 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_exd8k"]
+radius = 19.0263
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -48,5 +51,19 @@ value = 100.0
 
 [node name="ShootTimer" type="Timer" parent="."]
 
+[node name="DashTimer" type="Timer" parent="."]
+
+[node name="DashCooldownTimer" type="Timer" parent="."]
+
+[node name="DashArea" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="DashArea"]
+position = Vector2(0, -19)
+shape = SubResource("CircleShape2D_exd8k")
+
 [connection signal="timeout" from="IframeTimer" to="." method="_on_iframe_timer_timeout"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]
+[connection signal="area_entered" from="DashArea" to="." method="_on_dash_area_area_entered"]
+[connection signal="body_entered" from="DashArea" to="." method="_on_dash_area_body_entered"]
