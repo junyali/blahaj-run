@@ -78,12 +78,7 @@ func update_health_bar() -> void:
 	if health_bar:
 		var health_percentage: float = float(current_health) / float(max_health)
 		health_bar.value = health_percentage * 100
-			
-		health_bar.get_theme_stylebox("foreground").set_bg_color(Color(
-		1.0 if health_bar.ratio<0.5 else (2 - 2*health_bar.ratio),
-		1.0 if health_bar.ratio>0.5 else (2*health_bar.ratio),
-		0,1
-	))
+		
 
 func heal(amount: int) -> void:
 	current_health += amount

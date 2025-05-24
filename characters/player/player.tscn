@@ -7,7 +7,17 @@
 radius = 13.0384
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xxgcw"]
-bg_color = Color(1.78084e-06, 0.713626, 0.433566, 1)
+bg_color = Color(0.370052, 0.573373, 0.17064, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.387299, 0.380792, 0.0975305, 1)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -31,7 +41,7 @@ offset_top = 4.0
 offset_right = 72.0
 offset_bottom = 31.0
 scale = Vector2(0.5, 0.5)
-theme_override_styles/background = SubResource("StyleBoxFlat_xxgcw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xxgcw")
 value = 100.0
 
 [node name="IframeTimer" type="Timer" parent="."]
