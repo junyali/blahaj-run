@@ -14,7 +14,7 @@ extends CharacterBody2D
 
 ## Character Stats
 @export var max_health: float = 100.0
-@export var iframe_duration: float = 1.0
+@export var iframe_duration: float = 0.1
 @export var shoot_cooldown: float = 0.3
 
 ## Node References
@@ -132,7 +132,7 @@ func take_damage(damage: float) -> void:
 	current_health -= damage
 	current_health = max(current_health, 0)
 
-	flash_sprite(Color.RED)
+	flash_sprite(Color.RED, 0.1)
 	update_health_bar()
 	
 	start_invulnerability()
