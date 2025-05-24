@@ -1,8 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://dh01r6r3dssf6"]
+[gd_scene load_steps=9 format=3 uid="uid://dh01r6r3dssf6"]
 
 [ext_resource type="PackedScene" uid="uid://dtk5ao2rkcn23" path="res://characters/player/player.tscn" id="1_ilwad"]
 [ext_resource type="Texture2D" uid="uid://befbld83jvqqq" path="res://icon.svg" id="2_0vhbo"]
 [ext_resource type="PackedScene" uid="uid://h77b47fsrepk" path="res://characters/enemies/djungelskog.tscn" id="3_ldao0"]
+[ext_resource type="PackedScene" uid="uid://j5ydjqt8uofk" path="res://characters/enemies/picoling.tscn" id="4_55n5f"]
+[ext_resource type="PackedScene" uid="uid://dfhaocol7nrp" path="res://objects/meatballs.tscn" id="5_wg11f"]
+[ext_resource type="PackedScene" uid="uid://udmaig37knrn" path="res://objects/hotdog.tscn" id="6_yb8kn"]
+[ext_resource type="PackedScene" uid="uid://dec70hdopmyev" path="res://characters/enemies/pider.tscn" id="7_43k3a"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ldao0"]
 vertices = PackedVector2Array(673.75, -461.141, 742.148, 386.977, -701.031, 385.008, -703.961, -483.828)
@@ -22,3 +26,30 @@ texture = ExtResource("2_0vhbo")
 
 [node name="Djungelskog" parent="." instance=ExtResource("3_ldao0")]
 position = Vector2(309, 203)
+
+[node name="Djungelskog2" parent="." instance=ExtResource("3_ldao0")]
+position = Vector2(229, 226)
+
+[node name="Picoling" parent="." instance=ExtResource("4_55n5f")]
+position = Vector2(353, 99)
+
+[node name="Picoling2" parent="." instance=ExtResource("4_55n5f")]
+position = Vector2(408, -16)
+
+[node name="Picoling3" parent="." instance=ExtResource("4_55n5f")]
+position = Vector2(403, 25)
+
+[node name="Picoling4" parent="." instance=ExtResource("4_55n5f")]
+position = Vector2(394, 68)
+
+[node name="Picoling5" parent="." instance=ExtResource("4_55n5f")]
+position = Vector2(355, 47)
+
+[node name="Meatballs" parent="." instance=ExtResource("5_wg11f")]
+position = Vector2(333, -90)
+
+[node name="Hotdog" parent="." instance=ExtResource("6_yb8kn")]
+position = Vector2(150, -161)
+
+[node name="Pider" parent="." instance=ExtResource("7_43k3a")]
+position = Vector2(-52, -135)

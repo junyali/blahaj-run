@@ -163,6 +163,11 @@ func heal(amount: int) -> void:
 	update_health_bar()
 	
 func die() -> void:
+	var final_stats = GameManager.calculate_final_score()
+	print("Game Over!")
+	print("Final Score: ", final_stats.total_score)
+	print("Enemies Killed: ", final_stats.enemies_killed)
+	print("Time Survived: ", GameManager.format_time(final_stats.survival_time))
 	pass # death logic goes here X_X
 
 func _on_iframe_timer_timeout() -> void:

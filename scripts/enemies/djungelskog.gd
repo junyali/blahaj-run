@@ -98,6 +98,7 @@ func apply_knockback(force: Vector2) -> void:
 	velocity += force
 
 func die() -> void:
+	GameManager.add_enemy_kill("djungelskog")
 	queue_free()
 
 func _on_navigation_agent_velocity_computed(safe_velocity: Vector2) -> void:

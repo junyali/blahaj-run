@@ -15,9 +15,13 @@ run/main_scene="uid://dh01r6r3dssf6"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*res://scripts/autoload/GameManager.gd"
+
 [display]
 
-window/stretch/scale=4.0
+window/stretch/scale=2.0
 
 [input]
 
