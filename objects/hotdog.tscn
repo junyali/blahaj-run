@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://udmaig37knrn"]
+
+[ext_resource type="Script" uid="uid://3ocx8ln7yvcl" path="res://scripts/objects/hotdog.gd" id="1_q7ypd"]
+[ext_resource type="Texture2D" uid="uid://blyk616aml65s" path="res://art/objects/hotdog.png" id="2_q7ypd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dh7hp"]
+radius = 3.0
+
+[node name="Hotdog" type="Area2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_q7ypd")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_q7ypd")
+offset = Vector2(0, -5)
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_dh7hp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

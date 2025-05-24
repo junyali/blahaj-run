@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://j5ydjqt8uofk"]
+
+[ext_resource type="Script" uid="uid://b5uach83poo6u" path="res://scripts/enemies/picoling.gd" id="1_6ryoo"]
+[ext_resource type="Texture2D" uid="uid://bu5171p2v8ly6" path="res://art/characters/picoling.png" id="2_6ryoo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qongi"]
+radius = 5.09902
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iiaj3"]
+radius = 13.0384
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qongi"]
+bg_color = Color(0.757237, 0, 0.114266, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.36815, 0.0562213, 0.0785004, 1)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Picoling" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_6ryoo")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_6ryoo")
+offset = Vector2(0, -24)
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_qongi")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(0, -11)
+shape = SubResource("CircleShape2D_iiaj3")
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -12.0
+offset_top = 2.0
+offset_right = 84.0
+offset_bottom = 29.0
+scale = Vector2(0.25, 0.25)
+theme_override_styles/fill = SubResource("StyleBoxFlat_qongi")
+value = 100.0
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
