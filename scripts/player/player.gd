@@ -13,7 +13,7 @@ extends CharacterBody2D
 @export var dash_cooldown: float = 2.0
 
 ## Character Stats
-@export var max_health: float = 100.0
+@export var max_health: float = 500.0
 @export var iframe_duration: float = 0.1
 @export var shoot_cooldown: float = 0.3
 

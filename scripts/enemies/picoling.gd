@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 ## Enemy Stats
 @export var max_health: float = 30.0
-@export var speed: float = 160.0
+@export var speed: float = 200.0
 @export var attack_damage: float = 10.0
 @export var attack_range: float = 30.0
 @export var attack_cooldown: float = 0.25

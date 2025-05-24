@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
 ## Enemy Stats
-@export var max_health: float = 200.0
+@export var max_health: float = 100.0
 @export var speed: float = 80.0
-@export var attack_damage: float = 36.0
+@export var attack_damage: float = 20.0
 @export var attack_range: float = 50.0
-@export var attack_cooldown: float = 1.5
+@export var attack_cooldown: float = 2.0
 
 ## Node References
 @onready var sprite: Sprite2D = $Sprite

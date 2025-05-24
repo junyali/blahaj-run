@@ -24,7 +24,15 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	create_timers()
 	setup_timers()
+	spawn_initial_enemies()
 	start_spawning()
+	
+func spawn_initial_enemies() -> void:
+	spawn_picoling_swarm()
+	
+	for i in 3:
+		spawn_random_pickup()
+		await get_tree().create_timer(0.1).timeout
 	
 func _process(delta: float) -> void:
 	game_time += delta
