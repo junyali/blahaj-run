@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkpfhnp23h38s"]
+
+[ext_resource type="Script" uid="uid://jwnn7r8xj63f" path="res://scripts/player/player.gd" id="1_u12sw"]
+[ext_resource type="PackedScene" uid="uid://gsgul1rjwcom" path="res://models/objects/blahaj.glb" id="1_uvmj3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u12sw"]
+radius = 1.5
+height = 6.0
+
+[node name="Blahaj" type="CharacterBody3D"]
+script = ExtResource("1_u12sw")
+
+[node name="Mesh" parent="." instance=ExtResource("1_uvmj3")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 3.59598, 0)
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9976, 0)
+shape = SubResource("CapsuleShape3D_u12sw")
+
+[node name="Camera" type="Camera3D" parent="."]
