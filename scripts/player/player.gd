@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+## Scenes
+@export var bullet_scene: PackedScene = preload("res://objects/bullet.tscn")
+
 ## Character Variables
 @export var max_speed: float = 300.0
 @export var acceleration: float = 500.0
@@ -8,8 +11,7 @@ extends CharacterBody2D
 ## Character Stats
 @export var max_health: float = 100.0
 @export var iframe_duration: float = 1.0
-
-var current_health: float = max_health
+@export var shoot_cooldown: float = 0.3
 
 ## Node References
 @onready var sprite: Sprite2D = $Sprite2D
@@ -17,15 +19,21 @@ var current_health: float = max_health
 @onready var camera: Camera2D = $Camera
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var iframe_timer: Timer = $IframeTimer
+@onready var shoot_timer: Timer = $ShootTimer
 
+var current_health: float = max_health
 var is_invulnerable: bool = true
+var can_shoot: bool = true
 
 func _ready() -> void:
+	add_to_group("player")
 	setup_health()
 	setup_vulnerability()
+	setup_shooting()
 
 func _physics_process(delta: float) -> void:
 	handle_movement(delta)
+	handle_shooting()
 	move_and_slide()
 	
 func _process(delta: float) -> void:
@@ -42,6 +50,24 @@ func handle_movement(delta: float) -> void:
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 		
+func handle_shooting() -> void:
+	if Input.is_action_just_pressed("shoot") and can_shoot:
+		shoot()
+		
+func shoot() -> void:
+	if not bullet_scene:
+		return
+	
+	var bullet = bullet_scene.instantiate()
+	get_parent().add_child(bullet)
+	
+	var shoot_direction = (get_global_mouse_position() - global_position).normalized()
+	bullet.global_position = global_position + shoot_direction * 32
+	bullet.set_direction_and_rotation(shoot_direction)
+	
+	can_shoot = false
+	shoot_timer.start()
+		
 func setup_health() -> void:
 	current_health = max_health
 	update_health_bar()
@@ -49,6 +75,10 @@ func setup_health() -> void:
 func setup_vulnerability() -> void:
 	iframe_timer.wait_time = iframe_duration
 	iframe_timer.one_shot = true
+	
+func setup_shooting() -> void:
+	shoot_timer.wait_time = shoot_cooldown
+	shoot_timer.one_shot = true
 	
 func take_damage(damage: float) -> void:
 	if is_invulnerable:
@@ -79,6 +109,8 @@ func update_health_bar() -> void:
 		var health_percentage: float = float(current_health) / float(max_health)
 		health_bar.value = health_percentage * 100
 		
+func _on_shoot_timer_timeout() -> void:
+	can_shoot = true
 
 func heal(amount: int) -> void:
 	current_health += amount
