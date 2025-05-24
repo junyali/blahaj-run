@@ -7,7 +7,8 @@ var game_start_time: float = 0.0
 
 var enemy_scores: Dictionary = {
 	"djungelskog": 50,
-	"picoling": 10
+	"picoling": 10,
+	"pider": 150
 }
 
 var time_score_multiplier: float = 5.0
