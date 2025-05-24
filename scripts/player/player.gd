@@ -29,7 +29,7 @@ extends CharacterBody2D
 @onready var dash_area: Area2D = $DashArea
 
 var current_health: float = max_health
-var is_invulnerable: bool = true
+var is_invulnerable: bool = false
 var can_shoot: bool = true
 var is_dashing: bool = false
 var can_dash: bool = true

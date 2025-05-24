@@ -1,12 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://dh01r6r3dssf6"]
+[gd_scene load_steps=5 format=3 uid="uid://dh01r6r3dssf6"]
 
 [ext_resource type="PackedScene" uid="uid://dtk5ao2rkcn23" path="res://characters/player/player.tscn" id="1_ilwad"]
 [ext_resource type="Texture2D" uid="uid://befbld83jvqqq" path="res://icon.svg" id="2_0vhbo"]
+[ext_resource type="PackedScene" uid="uid://h77b47fsrepk" path="res://characters/enemies/djungelskog.tscn" id="3_ldao0"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ldao0"]
+vertices = PackedVector2Array(673.75, -461.141, 742.148, 386.977, -701.031, 385.008, -703.961, -483.828)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-714, -494, -711, 395, 753, 397, 683, -471)])
 
 [node name="MainLevel" type="Node2D"]
 y_sort_enabled = true
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_ldao0")
 
 [node name="Player" parent="." instance=ExtResource("1_ilwad")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_0vhbo")
+
+[node name="Djungelskog" parent="." instance=ExtResource("3_ldao0")]
+position = Vector2(309, 203)

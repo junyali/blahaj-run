@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://h77b47fsrepk"]
+
+[ext_resource type="Texture2D" uid="uid://d0c3c2p2d7crw" path="res://art/characters/djungelskog.png" id="1_iiaj3"]
+[ext_resource type="Script" path="res://scripts/enemies/djungelskog.gd" id="1_qongi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qongi"]
+radius = 14.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iiaj3"]
+radius = 18.0278
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qongi"]
+bg_color = Color(0.757237, 0, 0.114266, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.36815, 0.0562213, 0.0785004, 1)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Djungelskog" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_qongi")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_iiaj3")
+offset = Vector2(0, -20)
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+shape = SubResource("CircleShape2D_qongi")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(0, -18)
+shape = SubResource("CircleShape2D_iiaj3")
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -24.0
+offset_top = 4.0
+offset_right = 72.0
+offset_bottom = 31.0
+scale = Vector2(0.5, 0.5)
+theme_override_styles/fill = SubResource("StyleBoxFlat_qongi")
+value = 100.0
+
+[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="velocity_computed" from="NavigationAgent" to="." method="_on_navigation_agent_velocity_computed"]
